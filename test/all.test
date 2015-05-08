@@ -1,0 +1,19 @@
+@@ set
+  domain    localhost:3000
+  baseUrl   http://${domain}
+
+@@ Table devices
+  | deviceName  | deviceSize |
+  | mobile      | 320x480    |
+  | tablet      | 900x600    |
+  | desktop     | 1300x700   |
+
+@@ Table pages
+  | pageUrl | pageName |
+  | /       | home     |
+
+@@ Parameterized using pages
+@@ Parameterized using devices
+Device:${deviceName} Page:${pageName}
+  ${baseUrl}${pageUrl} ${deviceSize}
+    check test/specs/${pageName}.spec --include "${deviceName}"

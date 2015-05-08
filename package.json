@@ -1,0 +1,30 @@
+{
+  "name": "my-project",
+  "version": "0.0.1",
+  "scripts": {
+    "prebuild": "echo '$ npm test'",
+    "build": "browserify -e src/js/index.js -t reactify -t uglifyify -o www/bundle.min.js -d",
+    "pretest:js": "npm run lint:js",
+    "test": "npm run test:js && npm run test:visual",
+    "test:js": "browserify ./src/js/*_spec.js | tape-run | tap-spec",
+    "pretest:visual": "! type galen | grep -q 'not found'",
+    "test:visual": "galen test test/all.test --htmlreport test/reports",
+    "test:report": "browser-sync start --startPath 'test/reports/report.html' --server",
+    "lint:js": "jshint ./src/js/*.js",
+    "start": "browser-sync start --server www"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.7.1",
+    "browserify": "^10.1.3",
+    "galen": "0.0.2",
+    "jshint": "^2.7.0",
+    "reactify": "^1.1.0",
+    "tap-spec": "^3.0.0",
+    "tape": "^4.0.0",
+    "tape-run": "^1.0.0",
+    "uglifyify": "^3.0.1"
+  },
+  "dependencies": {
+    "react": "^0.13.2"
+  }
+}
